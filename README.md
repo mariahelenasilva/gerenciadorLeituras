@@ -1,0 +1,2 @@
+# gerenciadorLeituras
+Gerenciador de leituras
