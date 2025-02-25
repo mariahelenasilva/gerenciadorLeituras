@@ -1,0 +1,50 @@
+body {
+    margin: 0 auto;
+    text-align: center;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+
+}
+.container{
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000;
+    height: 140px;
+    width: 1000px;
+}
+
+.drag_item{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    cursor: grab;
+    border-radius: 10%;
+}
+
+#l1, #l2, #l3, #l4, #l5, #l6, #l7, #l8, #l9, #l10 {background-color: greenyellow;}
+
+
+.drop_container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; 
+    width: 90%; 
+    margin: 0 auto; 
+}
+
+#drop_ler, #drop_progresso, #drop_concluido {
+    flex: 1; 
+    min-width: 250px; 
+    height: 300px;
+    border: 2px dashed #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+}
+

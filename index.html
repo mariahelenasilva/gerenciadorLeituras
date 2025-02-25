@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas - Drag in Drop</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <h1>Gerenciador de Leituras</h1>
+    <!-- icone livro -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-book" viewBox="0 0 30 30">
+        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+    </svg>
+    <div class="container">
+        <div id="l1" class="drag_item" draggable="true">Torto Arado</div>
+        <div id="l2" class="drag_item" draggable="true">Demian</div>
+        <div id="l3" class="drag_item" draggable="true">Admiravél Mundo Novo</div>
+        <div id="l4" class="drag_item" draggable="true">Hamlet</div>
+        <div id="l5" class="drag_item" draggable="true">Orgulho e Preconceito</div>
+        <div id="l6" class="drag_item" draggable="true">Dom Casmurro</div>
+        <div id="l7" class="drag_item" draggable="true">Primo Brasilio</div>
+        <div id="l8" class="drag_item" draggable="true">O Cortiço</div>
+        <div id="l9" class="drag_item" draggable="true">O Velho e o Mar</div>
+        <div id="l10" class="drag_item" draggable="true">A Metamorfose</div>        
+    </div>
+
+    <h1 id="titulo">A LER(0)|EM PROGRESSO(0)|CONCLUÍDO(0)</h1>
+    <div class="drop_container">
+        <div id="drop_ler"></div>
+        <div id="drop_progresso"></div>
+        <div id="drop_concluido"></div>
+    </div>
+
+
+
+    <script>
+        const itens = document.querySelectorAll(".drag_item")
+        const drop_fazer = document.getElementById("drop_ler")
+        const drop_progresso = document.getElementById("drop_progresso")
+        const drop_concluido = document.getElementById("drop_concluido")
+        const drop_container = document.querySelector(".container")
+
+        itens.forEach(item => {
+            item.addEventListener("dragstart", (event) => {
+                event.dataTransfer.setData('text/plain', event.target.id)
+            }) 
+        })
+
+        drop_ler.addEventListener("dragover", (event) => {
+            event.preventDefault()
+        })
+
+        drop_ler.addEventListener("drop", (event) => {
+            event.preventDefault()
+            const data = event.dataTransfer.getData('text/plain')
+            const dragItem = document.getElementById(data)
+            drop_ler.appendChild(dragItem)
+        })
+
+        drop_progresso.addEventListener("dragover", (event) => {
+            event.preventDefault()
+        })
+
+        drop_progresso.addEventListener("drop", (event) => {
+            event.preventDefault()
+            const data = event.dataTransfer.getData('text/plain')
+            const dragItem = document.getElementById(data)
+            drop_progresso.appendChild(dragItem)
+        })
+
+        drop_concluido.addEventListener("dragover", (event) => {
+            event.preventDefault()
+        })
+
+        drop_concluido.addEventListener("drop", (event) => {
+            event.preventDefault()
+            const data = event.dataTransfer.getData('text/plain')
+            const dragItem = document.getElementById(data)
+            drop_concluido.appendChild(dragItem)
+        })
+
+        drop_container.addEventListener("dragover", (event) => {
+            event.preventDefault()
+        })
+
+        drop_container.addEventListener("drop", (event) => {
+            event.preventDefault()
+            const data = event.dataTransfer.getData('text/plain')
+            const dragItem = document.getElementById(data)
+            drop_container.appendChild(dragItem)
+        })
+
+
+        function atualizarContagem() {
+        const countLer = document.getElementById("drop_ler").children.length;
+        const countProgresso = document.getElementById("drop_progresso").children.length;
+        const countConcluido = document.getElementById("drop_concluido").children.length;
+        
+        document.getElementById("titulo").textContent = 
+            `A LER (${countLer}) | EM PROGRESSO (${countProgresso}) | CONCLUÍDO (${countConcluido})`;
+        }
+
+        // Adicionar a leitura em cada coluno, contando
+        ["drop_ler", "drop_progresso", "drop_concluido"].forEach(id => {
+            const dropzone = document.getElementById(id);
+            
+            dropzone.addEventListener("drop", (event) => {
+                event.preventDefault();
+                const data = event.dataTransfer.getData('text/plain');
+                const dragItem = document.getElementById(data);
+                dropzone.appendChild(dragItem);
+                
+                atualizarContagem(); // Atualiza a contagem após a mudança
+            });
+        });
+
+        // Inicializa a contagem ao carregar a página
+        atualizarContagem();
+
+    </script>
+    <p class="fs-6">Desenvolvido por Maria Helena Rodrigues da Silva</p>
+    <p class="fs-6">DS - SENAI 2025</p>
+</body>
+</html>
